@@ -1,14 +1,16 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
-        message.innerText = request.source;
-        window.open(request.source, '_blank');
+        message.href = request.source;
+        message.target = "_blank";
+        link.innerText = request.source;
+        //window.open(request.source, '_blank');
     }
 });
 
 function onWindowLoad() {
 
     var message = document.querySelector('#message');
-
+    var link = document.querySelector('#link');
     chrome.tabs.executeScript(null, {
         file: "getPagesSource.js"
     }, function() {
